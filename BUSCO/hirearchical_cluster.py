@@ -4,11 +4,11 @@ import matplotlib.pyplot as plt
 from ete3 import Tree  # Assuming you have ete3 installed, you can install it using: pip install ete3
 
 # Read the tab-separated file into a DataFrame
-df = pd.read_csv('/lustre/scratch123/tol/teams/tola/users/mu2/mollusca/ALG/busco_analyses/output_tables/combined_full_tables.tsv', sep='\t')
+df = pd.read_csv('combined_full_tables.tsv', sep='\t')
 
 # Assuming 'phylogenetic_tree_file' is the file containing the Newick format tree
 # You might need to adjust the file path accordingly
-phylogenetic_tree_file = '/lustre/scratch123/tol/teams/tola/users/mu2/mollusca/ALG/busco_analyses/output_tables/pruned-tree.txt'
+phylogenetic_tree_file = 'pruned-tree.txt'
 
 # Read the Newick format phylogenetic tree from the file
 with open(phylogenetic_tree_file, 'r') as file:
@@ -45,8 +45,7 @@ column_order = sorted(complete_genes_matrix.columns.get_level_values(0), key=ord
 complete_genes_matrix = complete_genes_matrix[column_order]
 
 # Cluster rows and columns with inverted color map
-clustered_matrix = sns.clustermap(complete_genes_matrix, cmap="viridis_r", method='average', metric='euclidean', figsize=(35, 25), vmin=0, vmax=1,
-                                  col_cluster=False, row_cluster=True)  # Set col_cluster to False to prevent column clustering
+clustered_matrix = sns.clustermap(complete_genes_matrix, cmap="viridis_r", method='average', metric='euclidean', figsize=(35, 35), vmin=0, vmax=1)
 
 # Increase font size and rotate tick labels for X-axis
 plt.setp(clustered_matrix.ax_heatmap.xaxis.get_majorticklabels(), rotation=45, ha="right", rotation_mode="anchor", fontsize=15)
@@ -58,7 +57,7 @@ plt.setp(clustered_matrix.ax_heatmap.yaxis.get_majorticklabels(), fontsize=15)
 plt.title('Gene Presence/Absence Matrix - Status: Complete')
 
 # Save the plot as a PDF
-#plt.savefig('/lustre/scratch123/tol/teams/tola/users/mu2/mollusca/ALG/busco_analyses/output_tables/againalmostorgbyphylogeny.svg', format='svg', dpi=72)
+#plt.savefig('your_plot_filename.pdf', format='pdf')
 
 # Show the plot
 plt.show()
